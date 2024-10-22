@@ -19,14 +19,14 @@ public class ParentCommand extends SubCommand {
         /groupperms group setprefix GROUP_NAME prefix
         /groupperms group addperm GROUP_NAME permission.uwu
         /groupperms group remperm GROUP_NAME permission.uwu
-
         /groupperms group addinherit GROUP_NAME permission.uwu
         /groupperms group reminherit GROUP_NAME permission.uwu
-        /groupperms group default [group]
-
-
+        /groupperms group setdefault GROUP_NAME
 
         /groupperms player setgroup [player] [group] <expiration> <reverts to this group>
+
+        /groupperms query
+        /groupperms info
 
 
          */
@@ -36,6 +36,7 @@ public class ParentCommand extends SubCommand {
         registerSubCommand(new PlayerCommand(api, this, 1, "player"));
         registerSubCommand(new InfoCommand(api,  this, 1, "info"));
         registerSubCommand(new QueryCommand(api,  this, 1, "query"));
+        registerSubCommand(new SaveCommand(api, this, 1, "save"));
         registerSubCommand(new DescriptionCommand(api, this, 1, "help"));
 
 

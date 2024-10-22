@@ -15,6 +15,14 @@ messages:
     circular_inheritance: "&cGroup &e{inheritGroup} &ccannot inherit from its own parent group of &e{group}&c!"
     only_players: "&cOnly players can use this command!"
 
+    save:
+      description: "Immediately upload current data to the database."
+      success:
+        start: "&cStarting upload..."
+        completed: "&2All data has been uploaded!"
+        error: "&c&lSomething went wrong, data cannot be uploaded."
+        already_saving: "&cThe data is currently being uploaded already. Try again later."
+
     # Top level commands here
     group:
       description: "Admin controls over groups."

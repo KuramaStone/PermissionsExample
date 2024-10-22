@@ -18,6 +18,7 @@ public class PermissionsApi {
     public static String playerCommandPermission = "permissions.commands.player";
     public static String infoCommandPermission = "permissions.commands.info";
     public static String queryCommandPermission = "permissions.commands.query";
+    public static String saveCommandPermission = "permissions.commands.save";
     /**
      * Loaded groups by groupName
      */

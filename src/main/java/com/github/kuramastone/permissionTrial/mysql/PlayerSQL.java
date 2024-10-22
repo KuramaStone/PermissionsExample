@@ -4,10 +4,7 @@ import com.github.kuramastone.permissionTrial.PermissionsApi;
 import com.github.kuramastone.permissionTrial.players.PlayerProfile;
 
 import java.sql.*;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class PlayerSQL {
 
@@ -19,6 +16,9 @@ public class PlayerSQL {
         try (Connection connection = database.getConnection()) {
             connection.setAutoCommit(false); // Disable auto-commit
 
+            // Cache existing player UUIDs at the start
+            Set<UUID> existingProfiles = getExistingPlayerUUIDs(connection);
+
             try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery);
                  PreparedStatement updateStmt = connection.prepareStatement(updateQuery)) {
 
@@ -26,8 +26,7 @@ public class PlayerSQL {
                     UUID uuid = entry.getKey();
                     PlayerProfile profile = entry.getValue();
 
-                    // Check if the profile already exists
-                    if (profileExists(connection, uuid)) {
+                    if (existingProfiles.contains(uuid)) {
                         // Update the existing profile
                         updateStmt.setLong(1, profile.getExpirationTime());
                         updateStmt.setString(2, profile.getCurrentPermissionGroup() == null ? "" : profile.getCurrentPermissionGroup().getGroupName());
@@ -52,6 +51,21 @@ public class PlayerSQL {
         }
     }
 
+    // Helper method to get all existing player UUIDs from the database
+    private static Set<UUID> getExistingPlayerUUIDs(Connection connection) throws SQLException {
+        Set<UUID> existingUUIDs = new HashSet<>();
+        String query = "SELECT uuid FROM player_profiles";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                existingUUIDs.add(UUID.fromString(rs.getString("uuid")));
+            }
+        }
+
+        return existingUUIDs;
+    }
+
     // Method to load all player profiles from the database
     public static Map<UUID, PlayerProfile> loadAllProfiles(PermissionsApi api, SQLDatabase database) throws SQLException {
         Map<UUID, PlayerProfile> profiles = new LinkedHashMap<>();
@@ -74,18 +88,6 @@ public class PlayerSQL {
         }
 
         return profiles;
-    }
-
-    // Helper method to check if a profile exists
-    private static boolean profileExists(Connection connection, UUID uuid) throws SQLException {
-        String checkQuery = "SELECT COUNT(*) FROM player_profiles WHERE uuid = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(checkQuery)) {
-            stmt.setString(1, uuid.toString());
-            try (ResultSet rs = stmt.executeQuery()) {
-                rs.next();
-                return rs.getInt(1) > 0;
-            }
-        }
     }
 
     public static void createSchema(SQLDatabase sqlDatabase) throws SQLException {
