@@ -1,6 +1,6 @@
 Database:
   name: "testdb"
-  useLocalTestingDatabase: false
+  useLocalTestingDatabase: true
   password: ""
   user: "plugin"
   url: "jdbc:mysql://localhost:3306/"
