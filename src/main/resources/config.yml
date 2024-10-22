@@ -1,0 +1,78 @@
+Database:
+  name: "testdb"
+  useLocalTestingDatabase: false
+  password: ""
+  user: "plugin"
+  url: "jdbc:mysql://localhost:3306/"
+
+messages:
+  commands:
+    insufficient_permissions: "&cYou do not have permission to use this!"
+    group_already_exists: "&cThis group &e{group} &calready exists!"
+    group_doesnt_exists: "&cThis group &e{group} &cdoes not exist yet."
+    unknown_time: "&c&l{value} &cis not a valid time."
+    cannot_inherit_self: "&cA group cannot inherit itself!"
+    circular_inheritance: "&cGroup &e{inheritGroup} &ccannot inherit from its own parent group of &e{group}&c!"
+    only_players: "&cOnly players can use this command!"
+
+    # Top level commands here
+    group:
+      description: "Admin controls over groups."
+    player:
+      description: "Admin controls over players."
+    info:
+      description: "Query information about a group."
+      success:
+        - "&e&l{group}"
+        - "&ePrefix: &f{prefix}"
+        - "&ePermissions:"
+        - "&f{permissions}"
+        - "&eInherits From:"
+        - "&f{children}"
+    query:
+      description: "Query your current group status."
+      no_group: "&cYou are not in a group yet."
+      success-permanent:
+        - "&e&lGroup: &f{group}"
+        - "  &ePrefix: &f{prefix}"
+        - "  &eExpires: &fNever"
+      success-temp:
+        - "&e&lGroup: &f{group}"
+        - "  &ePrefix: &f{prefix}"
+        - "  &eExpires: &f{expiration}"
+        - "  &eGroup After Expiration: &f{nextGroup}"
+
+    # Group subcommands
+    create:
+      success: "&2Created Group &e{group}."
+      description: "Creates this group!"
+    remove:
+      success: "&4Removed Group &e{group}."
+      description: "Delete this group. All members become the default rank."
+    setprefix:
+      success: "&2Group &e{group} &2had its prefix set to &e{prefix}."
+      description: "Sets the prefix for this group"
+    addperm:
+      success: "&2Group &e{group} &2gained permission to &e{perm}."
+      description: "Removes a permission from this group"
+    remperm:
+      success: "&cGroup &e{group} &clost permission to &e{perm}."
+      description: "Removes a permission from this group"
+    addinherit:
+      success: "&2Group &e{group} &2gained inheritance from &e{inheritGroup}."
+      description: "Adds inheritance from another group to this group."
+    reminherit:
+      success: "&cGroup &e{group} &clost inheritance from &e{inheritGroup}."
+      description: "Removes inheritance from another group to this group."
+    default:
+      success: "&2Group &e{group} &2is now the default group for players!"
+      description: "Set the group that players will default to."
+    setdefault:
+      success: "&2The default group for players is now &e{group}&2!"
+      description: "Set the default group for new players."
+
+      #Player subcommands
+    setgroup:
+      success-short: "&2Player &e{player} &2is now a member of &e{group}&2."
+      success-full: "&2Player &e{player} &2is now a member of &e{group}&2 for &e{time} &2time before being sent to &2{nextGroup}."
+      description: "Modify what group a player is a member of."

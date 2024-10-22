@@ -1,0 +1,10 @@
+name: PermissionTrial
+version: ${version}
+main: com.github.kuramastone.permissionTrial.PermissionTrial
+api-version: '1.21'
+
+depend: ["packetevents", "PlaceholderAPI"]
+
+commands:
+  groupperms:
+    description: Parent command for PermissionTrial
