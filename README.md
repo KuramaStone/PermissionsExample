@@ -12,28 +12,28 @@
 
 ### Group Management
 - **Permission**: *permissions.commands.group*
-- `/groupperms group create GROUP_NAME`  
+- `/groupperms group create [group]`  
   *Creates a new group.*
   
-- `/groupperms group remove GROUP_NAME`  
+- `/groupperms group remove [group]`  
   *Removes the group.*
 
-- `/groupperms group setprefix GROUP_NAME prefix`  
+- `/groupperms group setprefix [group] [prefix]`  
   *Sets the prefix for a group.*
 
-- `/groupperms group addperm GROUP_NAME permission.uwu`  
+- `/groupperms group addperm [group] [permission]`  
   *Adds a permission to the group.*
 
-- `/groupperms group remperm GROUP_NAME permission.uwu`  
+- `/groupperms group remperm [group] [permission]`  
   *Removes a permission from the group.*
 
-- `/groupperms group addinherit GROUP_NAME inheritGroup`  
+- `/groupperms group addinherit [group] [inheritGroup]`  
   *Adds inheritance from another group, providing all of its permissions as well.*
 
-- `/groupperms group reminherit GROUP_NAME inheritGroup`  
+- `/groupperms group reminherit [group] [inheritGroup]`  
   *Removes inheritance from another group.*
 
-- `/groupperms group setdefault GROUP_NAME`  
+- `/groupperms group setdefault [group]`  
   *Sets this group as the default for new players who join.*
 
 ### Player Management
