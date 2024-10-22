@@ -7,6 +7,8 @@
 - **Inheritance**: Groups can inherit permissions from other groups.
 - **Command Management**: Create and assign groups entirely in-game via commands, no configuration files needed.
 - **Automatic Saving**: Data will be uploaded periodically and when the plugin closes to prevent lost data.
+- **PlaceholderAPI**: Using *%groupperms_group%* will provide the player's group, and *%groupperms_expiration% will provide the player's expiration timer.
+- **Customize Every Message**: Every message in the config.yml can be modified with color codes.
 
 ## Command Structure
 
