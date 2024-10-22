@@ -132,8 +132,9 @@ public class PlayerProfile {
             return;
         Player player = getPlayer();
 
-        if (player == null) {
-            throw new RuntimeException("Cannot modify the permissions of an offline player!");
+        // cant modify offline player persm
+        if(!isOnline()) {
+            return;
         }
 
         // remove all permissions by disposing of attachment
@@ -167,7 +168,7 @@ public class PlayerProfile {
         // add base permissions
         for (String permission : group.getGroupPermissions()) {
             permissionAttachment.setPermission(permission, true);
-            PermissionTrial.logger.info("Adding permission %s from group %s".formatted(permission, group.getGroupName()));
+            //PermissionTrial.logger.info("Adding permission %s from group %s".formatted(permission, group.getGroupName()));
         }
 
         // add inherited permissions

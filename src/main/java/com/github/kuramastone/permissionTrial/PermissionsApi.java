@@ -101,8 +101,17 @@ public class PermissionsApi {
         String url;
         if (configOptions.databaseUseH2)
             url = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1"; // In-memory database URL
-        else
+        else {
             url = configOptions.databaseURL; // local mysql server
+            if(!url.endsWith(configOptions.databaseName)) {
+                if(url.endsWith("/")) {
+                    url = url + configOptions.databaseName;
+                }
+                else {
+                    url = url + "/" + configOptions.databaseName;
+                }
+            }
+        }
 
         String databaseName = configOptions.databaseName;
         String user = configOptions.databaseUser;
